@@ -1,0 +1,27 @@
+{
+   "name":"Find from address bar",
+   "description":"Find in page using the address bar keyword \"f\"",
+   "homepage_url":"https://github.com/Madis0/find-from-addressbar/",
+   "manifest_version":2,
+   "permissions":[
+      "find"
+   ],
+   "background":{
+      "scripts":[
+         "background.js"
+      ]
+   },
+   "omnibox":{
+      "keyword":"f"
+   },
+   "icons":{
+      "48":"icon-48.png",
+      "96":"icon-96.png"
+   },
+   "version":"1.0",
+   "applications":{
+      "gecko":{
+         "strict_min_version":"57.0a1"
+      }
+   }
+}
