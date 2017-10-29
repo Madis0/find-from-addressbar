@@ -1,15 +1,45 @@
+var resultCount = 0;
+
 browser.omnibox.setDefaultSuggestion({
-    description: "Find text in page"
+    description: "Enter text to find in page"
 });
 
-function found(results) {
+function highlightFound(results) {
+  resultCount = results.count;
+  
   if (results.count > 0) {
     browser.find.highlightResults();
   }
+  else {
+    browser.find.removeHighlighting();
+  }
+}
+
+function createSuggestion(input) {
+  var result = [];
+
+  var suggestion = {
+      content: input
+  };
+
+  if (resultCount > 0) {
+    suggestion = {
+	    description: resultCount + " results found for " + input
+    };
+  }
+  else {
+    suggestion = {
+	    description: "No results found for " + input
+    };
+  }
+
+  result.push(suggestion);
+  return result;
 }
 
 browser.omnibox.onInputChanged.addListener((input, suggest) => {
-    browser.find.find(input).then(found);
+    suggest(createSuggestion(input));
+    browser.find.find(input).then(highlightFound);
 });
 
 browser.omnibox.onInputEntered.addListener((url, disposition) => {
