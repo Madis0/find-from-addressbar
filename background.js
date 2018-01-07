@@ -23,14 +23,10 @@ function createSuggestion(input) {
   };
 
   if (resultCount > 0) {
-    suggestion = {
-	    description: resultCount + " results found for " + input
-    };
+        description = resultCount + " results found for " + input
   }
   else {
-    suggestion = {
-	    description: "No results found for " + input
-    };
+        description = "No results found for " + input
   }
 
   result.push(suggestion);
